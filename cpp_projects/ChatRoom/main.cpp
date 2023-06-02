@@ -9,6 +9,9 @@
 #include <stdio.h>
 #include <errno.h>
 
+#include <iostream>
+#include <format>
+
 static void
 echo_read_cb(struct bufferevent *bev, void *ctx)
 {
@@ -59,6 +62,8 @@ accept_error_cb(struct evconnlistener *listener, void *ctx)
 int
 main(int argc, char **argv)
 {
+    std::cout << std::format("lib {} is working\n", "format");
+    
     struct event_base *base;
     struct evconnlistener *listener;
     struct sockaddr_in sin;
