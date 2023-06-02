@@ -1,0 +1,9 @@
+{
+    "cmake.sourceDirectory": "/home/user/WebServices/cpp_projects",
+    "cmake.configureArgs": [
+        "-DCMAKE_TOOLCHAIN_FILE=/home/user/vcpkg/scripts/buildsystems/vcpkg.cmake"
+    ],
+    "files.associations": {
+        "format": "cpp"
+    }
+}

@@ -8,6 +8,8 @@ wsl
 sudo apt update
 sudo apt-get install -y pkg-config  
 sudo apt install glibc-source -y
+sudo apt install ninja-build
+sudo apt-get install gdb
 ```  
 2. install gcc  
 ```console  
@@ -84,4 +86,6 @@ cd build
 cmake .. -DCMAKE_TOOLCHAIN_FILE=/home/user/vcpkg/scripts/buildsystems/vcpkg.cmake
 cmake --build ./ --config Release  
 ```
-
+NOTE:  
+if y use vscode  
+y can use cmake-tools extension and settings.json file 
