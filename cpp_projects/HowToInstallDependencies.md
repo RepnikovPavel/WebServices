@@ -2,7 +2,10 @@
 linux
 wsl
 
-# first of all
+# first of all  
+The general recommendation is to use the latest version of your operating system.  
+Use a compiler that supports at least c++17 well enough(this is necessary for the successful compilation of some third-party libraries).  
+stock up on disk space before installation (100 gigabytes for reliability).  
 1. 
 ```console  
 sudo apt update
@@ -20,9 +23,20 @@ cd ..
 mkdir objdir
 cd objdir
 $PWD/../gcc-13.1.0/configure --prefix=$HOME/gcc-13.1.0 --enable-languages=c,c++
-make -j 8
-make install
-```
+make -j$(nproc)
+make install 
+```  
+add gcc to PATH:  
+e.g. in file $HOME/.profile write line  
+export PATH="$HOME/gcc-13.1.0/bin:$PATH"
+
+if you are using wsl - restart it
+check supported versions of c++  
+```console  
+gcc -v --help 2> /dev/null | sed -n '/^ *-std=\([^<][^ ]\+\).*/ {s//\1/p}'
+```  
+
+
 
 
 # NOTE
@@ -78,6 +92,45 @@ export PATH="$HOME/vcpkg:$PATH"
 vcpkg install libevent
 vcpkg integrate install  
 ```  
+
+# userver installation  
+# it doesn't work right now  
+goto [installation instruction](https://userver.tech/d1/d03/md_en_userver_tutorial_build.html)
+e.g.  
+Ubuntu 20.04  
+If errors occur when calling the cmake command, follow the instructions that are printed to you in the console.  
+Do not miss the errors and warnings that I type into the console.
+```console
+git clone https://github.com/userver-framework/userver.git  
+cd userver    
+sudo apt install --allow-downgrades -y $(cat scripts/docs/en/deps/ubuntu-20.04.md | tr '\n' ' ')  
+mkdir build_release
+cd build_release
+cmake -DUSERVER_FEATURE_CRYPTOPP_BLAKE2=0 -DUSERVER_FEATURE_REDIS_HI_MALLOC=1 -DCMAKE_BUILD_TYPE=Release ..
+make -j$(nproc)
+```
+test the viability of what you have compiled:  
+from build_release folder  
+```console  
+ulimit -n 4096 && ctest -V
+```
+to include userver to y project: 
+includes paths:
+e.g.
+```console  
+${HOME}/userver/core/include
+```  
+add following line to CMakeLists.txt file:  
+```console  
+include(/home/user/userver/cmake/SetupEnvironment.cmake)
+```
+in folder build:  
+```console  
+cmake -D CMAKE_C_COMPILER=/home/user/gcc-13.1.0/bin/gcc -D CMAKE_CXX_COMPILER=/home/user/gcc-13.1.0/bin/g++ ..
+cmake --build ./ --config Release
+```
+
+
 # build project  
 from folder with CMakeLists.txt  
 ```console  
@@ -89,3 +142,4 @@ cmake --build ./ --config Release
 NOTE:  
 if y use vscode  
 y can use cmake-tools extension and settings.json file 
+
