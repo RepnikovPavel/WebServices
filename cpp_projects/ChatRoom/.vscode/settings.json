@@ -1,0 +1,15 @@
+{
+    "cmake.sourceDirectory": "/home/user/WebServices/cpp_projects/ChatRoom",
+    "cmake.buildDirectory": "/home/user/WebServices/cpp_projects/ChatRoom/build",
+    
+    "cmake.configureArgs": [
+        "-DCMAKE_TOOLCHAIN_FILE=/home/user/vcpkg/scripts/buildsystems/vcpkg.cmake",
+        "-DCMAKE_C_COMPILER=/home/user/gcc-13.1.0/bin/gcc", 
+        "-DCMAKE_CXX_COMPILER=/home/user/gcc-13.1.0/bin/g++"
+    ],
+    "files.associations": {
+        "format": "cpp"
+    },
+    "C_Cpp.errorSquiggles": "enabled",
+    "editor.minimap.enabled": false
+}
