@@ -1,16 +1,13 @@
 package NodeStorage
 
-import (
-	"database/sql"
-	"time"
-)
+import "database/sql"
 
 const (
 	SQL_Schema_AccountCold string = `
 	CREATE TABLE IF NOT EXISTS cold_account_info(
 		id INT NOT NULL,
 		time_of_registration TIMESTAMP,
-		PRIMATY KEY (id)
+		PRIMARY KEY (id)
 	);
 	`
 	SQL_Insert_AccountCold string = `
@@ -49,6 +46,11 @@ const (
 )
 
 type SQLiteConf struct {
-	db   sql.DB
-	time time.Time
+	DriverName     string
+	DataSourceName string
+}
+
+type DBSession struct {
+	*sql.DB
+	*sql.Stmt
 }

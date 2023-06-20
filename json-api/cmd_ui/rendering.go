@@ -2,6 +2,7 @@ package rendering
 
 import (
 	"fmt"
+	"log"
 	"time"
 )
 
@@ -14,4 +15,8 @@ func Spinner() {
 			time.Sleep(FrameDuration)
 		}
 	}
+}
+
+func LOGERR(err error) {
+	log.Printf("error: %s\n", err)
 }
