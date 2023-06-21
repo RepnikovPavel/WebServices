@@ -2,10 +2,25 @@ package DataStructures
 
 import "time"
 
+type UserServerSide struct {
+	UID string
+}
+type UserSeverPayload struct {
+	NumberOfVirtulCoins uint64
+	NumberOfFallenTrees uint64
+	TimeOfLastActivity  time.Time
+}
+
+type UserClientSide struct {
+	FirstName string
+	LastName  string
+	Email     string
+	TGnick    string
+}
+
 type UserAccount struct {
-	CurrentUserName   string
-	CurrentUserSecret string
-	AccountID         string
+	UserUID   string
+	AccountID string
 }
 
 type Event_CreateAccount struct {

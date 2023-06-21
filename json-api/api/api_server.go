@@ -2,11 +2,68 @@ package api
 
 import (
 	"encoding/json"
+	"fmt"
+	"json-api/DataStructures"
 	"log"
 	"net/http"
 
 	"github.com/gorilla/mux"
 )
+
+var (
+	urd UserRegistrationDesk
+	ugs UserGetterSetter
+)
+
+type UserRegistrationDesk struct {
+	// link to db
+	// mutex
+}
+
+// TODO: add custom error with db error code
+func (rd *UserRegistrationDesk) IsUserExists() (bool, error) {
+	return false, nil
+}
+
+func (rd *UserRegistrationDesk) RegisterAUser(ucs DataStructures.UserClientSide) error {
+	// if user exists
+	//    create UserAccount
+	//    create UserServerSide
+	//    create UserServerPayload
+	//    make transactions in db
+	//    update cach
+	//    using mutex for goroutines
+	return nil
+}
+
+func (rd *UserRegistrationDesk) DeleteAUser(ucs DataStructures.UserServerSide) error {
+	// if user exists
+	//    make transactions in db
+	//    update cach
+	//    using mutex for goroutines
+	return nil
+}
+
+type UserGetterSetter struct {
+}
+
+func (ugs *UserGetterSetter) UpdateAUser(ucs DataStructures.UserClientSide) error {
+	// if user exists
+	//    update UserServerSide
+	//    update UserserverPayload
+	//    make transactions in db
+	//    update cach
+	//    using mutex for goroutines
+	return nil
+}
+func (ugs *UserGetterSetter) ReadAUser() (DataStructures.UserClientSide, error) {
+	// if user exists
+	//    read UserClientSide
+	//    safety read from db
+	//    update cach
+	//    using mutex for goroutines
+	return DataStructures.UserClientSide{}, nil
+}
 
 // api errors segment
 type ApiError struct {
@@ -65,11 +122,11 @@ func NewServer(conf ServerConfig) *Server {
 }
 
 const (
-	rout0 string = "rout0"
-	rout1 string = "rout1"
-	rout2 string = "rout2"
-	rout3 string = "rout3"
-	rout4 string = "rout4"
+	rout0 string = "/rout0"
+	rout1 string = "/rout1"
+	rout2 string = "/rout2"
+	rout3 string = "/rout3"
+	rout4 string = "/rout4"
 )
 
 // CRUD for accounts
@@ -77,18 +134,33 @@ const (
 // type payload func(w http.ResponseWriter, r *http.Request) error
 
 func PostAccount(w http.ResponseWriter, r *http.Request) error {
+	// blocking op
+	// 1) parse body
+	// 2) is user exists
+	// 3) do payload
+	// isexists, err := urd.IsUserExists()
+
+	// 1)
+	fmt.Println("POST method works")
+
 	return nil
 }
 
 func DeleteAccount(w http.ResponseWriter, r *http.Request) error {
+	fmt.Println("DELETE method works")
+
 	return nil
 }
 
 func PutAccount(w http.ResponseWriter, r *http.Request) error {
+	fmt.Println("PUT method works")
+
 	return nil
 }
 
 func GetAccount(w http.ResponseWriter, r *http.Request) error {
+	fmt.Println("GET method works")
+
 	return nil
 }
 
@@ -120,10 +192,11 @@ func (s *Server) Run() {
 	/*ServeHTTP(ResponseWriter, *Request)*/
 	router.HandleFunc(rout0, makeHTTPHandleFunc(HandleAccount))
 	/* ListenAndServe(addr string, handler Handler) error */
-	log.Printf("Listern Server has started on sockaddr=%s", s.Sockaddr)
+	log.Printf("Listern Server has started on sockaddr %s", s.Sockaddr)
+	fmt.Printf("supported routes:\n%s\n",
+		rout0)
 	startup_error := http.ListenAndServe(s.Sockaddr, router)
 	if startup_error != nil {
 		log.Printf("error: %s\nin %s", startup_error, "Server/Run/http.ListenAndServe")
 	}
-
 }

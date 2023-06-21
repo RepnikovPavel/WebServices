@@ -1,20 +1,18 @@
 package main
 
 import (
-	"json_api_project/api"
-	rendering "json_api_project/cmd_ui"
+	"json-api/api"
+	"json-api/cmd_ui"
 	"log"
-
-	_ "github.com/mattn/go-sqlite3"
 )
 
 func main() {
+
 	log.Printf("start process")
 	conf := api.ServerConfig{
-		Sockaddr: ":6666",
+		Sockaddr: "127.0.0.1:6666",
 	}
-	go rendering.Spinner()
+	go cmd_ui.Spinner()
 	server := api.NewServer(conf)
 	server.Run()
-	rendering.Spinner()
 }

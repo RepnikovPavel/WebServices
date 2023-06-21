@@ -1,4 +1,4 @@
-package rendering
+package cmd_ui
 
 import (
 	"fmt"
