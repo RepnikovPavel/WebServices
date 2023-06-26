@@ -1,2 +1,6 @@
-1. go get github.com/mattn/go-sqlite3  
-2. go get github.com/gorilla/mux
+
+```console  
+go get github.com/mattn/go-sqlite3    
+go get github.com/gorilla/mux
+go get github.com/lib/pq
+```

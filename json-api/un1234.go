@@ -1,7 +1,8 @@
 package main
 
 import (
-	"json-api/api"
+	"fmt"
+	"json-api/Storage"
 	"json-api/cmd_ui"
 	"log"
 )
@@ -9,10 +10,16 @@ import (
 func main() {
 
 	log.Printf("start process")
-	conf := api.ServerConfig{
-		Sockaddr: "127.0.0.1:6666",
-	}
 	go cmd_ui.Spinner()
-	server := api.NewServer(conf)
-	server.Run()
+	// conf := api.ServerConfig{
+	// 	Sockaddr: "127.0.0.1:6666",
+	// }
+	// server := api.NewServer(conf)
+	// server.Run()
+	storage_layer, err := Storage.NewPostgreLayer()
+	if err != nil {
+		cmd_ui.LOGERR(err)
+	}
+	fmt.Println(&storage_layer)
+
 }

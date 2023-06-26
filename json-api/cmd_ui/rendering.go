@@ -1,6 +1,7 @@
 package cmd_ui
 
 import (
+	"errors"
 	"fmt"
 	"log"
 	"time"
@@ -19,4 +20,8 @@ func Spinner() {
 
 func LOGERR(err error) {
 	log.Printf("error: %s\n", err)
+}
+
+func LOGERRSEQ(errs ...error) {
+	log.Printf("\nerror seq: \n%s\n", errors.Join(errs...))
 }

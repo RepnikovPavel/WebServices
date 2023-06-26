@@ -83,11 +83,11 @@ const (
 // end of epi errors segment
 
 func WriteJSON(w http.ResponseWriter, statusCode int, v any) error {
-	w.WriteHeader(statusCode)
 	// Header signature is
 	// type Header map[string][]string
 	// Set(key: x string,value: y string)
-	w.Header().Set("Content-Type", "application/json")
+	w.Header().Add("Content-Type", "application/json")
+	w.WriteHeader(statusCode)
 	return json.NewEncoder(w).Encode(v)
 }
 
@@ -159,9 +159,9 @@ func PutAccount(w http.ResponseWriter, r *http.Request) error {
 }
 
 func GetAccount(w http.ResponseWriter, r *http.Request) error {
-	fmt.Println("GET method works")
-
-	return nil
+	fmt.Printf("%s", "GET method works")
+	ExStruct := DataStructures.NewExampleStruct()
+	return WriteJSON(w, http.StatusOK, ExStruct)
 }
 
 func HandleAccount(w http.ResponseWriter, r *http.Request) error {
