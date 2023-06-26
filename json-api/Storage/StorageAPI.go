@@ -19,16 +19,34 @@ func (perr PostgreError) Error() string {
 
 // CRUD API
 type AccountAPI interface {
-	CreateAccount(*DS.AccountUID) error
-	DeleteAccount() error
-	UpdateAccount(*DS.AccountUID) error
-	GetAccount(DS.AccountUID) error
+	CreateAccount(DS.AccountUID) error
+	DeleteAccount(DS.AccountUID) error
+	UpdateAccount(DS.AccountUID) error
+	GetAccount(DS.AccountUID) (DS.AllAccountInfo, error)
 	// TODO: why it is not compiled
 	// GetAccount(DS.AccountUID) (DS.AllAccountInfo, error)
 }
 
 type PostgreLayer struct {
 	db *sql.DB // pool of connections. green thread safe.
+}
+
+// CRUD API implementation
+
+func (pl *PostgreLayer) CreateAccount(auid DS.AccountUID) error {
+	return nil
+}
+
+func (pl *PostgreLayer) DeleteAccount(auid DS.AccountUID) error {
+	return nil
+}
+
+func (pl *PostgreLayer) UpdateAccount(auid DS.AccountUID) error {
+	return nil
+}
+
+func (pl *PostgreLayer) GetAccount(auid DS.AccountUID) (DS.AllAccountInfo, error) {
+	return DS.AllAccountInfo{}, nil
 }
 
 func NewPostgreLayer() (*PostgreLayer, error) {

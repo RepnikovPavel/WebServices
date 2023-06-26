@@ -4,6 +4,7 @@ import (
 	"encoding/json"
 	"fmt"
 	"json-api/DataStructures"
+	"json-api/Storage"
 	"log"
 	"net/http"
 
@@ -112,12 +113,14 @@ type ServerConfig struct {
 }
 
 type Server struct {
-	Sockaddr string
+	Sockaddr   string
+	AccountAPI Storage.AccountAPI
 }
 
-func NewServer(conf ServerConfig) *Server {
+func NewServer(conf ServerConfig, AccountAPI Storage.AccountAPI) *Server {
 	return &Server{
-		Sockaddr: conf.Sockaddr,
+		Sockaddr:   conf.Sockaddr,
+		AccountAPI: AccountAPI,
 	}
 }
 
