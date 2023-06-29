@@ -66,3 +66,11 @@ func NewPostgreLayer() (*PostgreLayer, error) {
 	}
 	return pl, nil
 }
+
+func (pl *PostgreLayer) CreateORValidateSchema() {
+
+}
+
+func SyncRunSQLQuery() {
+
+}

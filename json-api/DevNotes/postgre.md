@@ -18,3 +18,10 @@ func main() {
 	…
 }  
 ```
+
+# how to run sql script under running docker container  
+
+```bash  
+docker cp ./localfile.sql containername:/container/path/file.sql &&
+docker exec -u postgresuser containername psql dbname postgresuser -f /container/path/file.sql  
+```
